@@ -39,8 +39,11 @@ namespace mvcdemo.Controllers
             {
                 Name = "Mike",
                 Email = "mike@gmail.com",
-                Mobile = "3934934343"
             };
+
+            c.Mobile.Add("3434334343");
+            c.Mobile.Add("3434033411");
+            c.Mobile.Add("9848484444");
 
             return View(c); // Sending model to view 
         }

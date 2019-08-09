@@ -1,0 +1,32 @@
+﻿@model mvcdemo.Models.Currency
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Currency Conversion</title>
+</head>
+<body>
+    <h2>Convert To USD</h2>
+    @using (Html.BeginForm())
+    {
+        <span>INR: </span>
+        @Html.EditorFor(model => model.Inr)
+        @Html.ValidationMessageFor(model => model.Inr)
+        <p></p>
+        <input type="submit" value="Convert" />
+    }
+
+    @if (Model.Usd > 0)
+    {
+        <h3>USD : @Model.Usd</h3>
+    }
+
+
+</body>
+</html>
