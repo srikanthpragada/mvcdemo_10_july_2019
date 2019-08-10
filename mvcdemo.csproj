@@ -147,6 +147,7 @@
     </Compile>
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\CurrencyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +189,7 @@
     <Content Include="Views\Hello\Wish.cshtml" />
     <Content Include="Views\Hello\Contact.cshtml" />
     <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Views\Currency\Convert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
