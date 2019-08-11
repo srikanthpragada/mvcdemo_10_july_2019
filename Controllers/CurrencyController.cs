@@ -35,14 +35,6 @@ namespace mvcdemo.Controllers
         public ActionResult Convert()
         {
             CurrencyModel c = new CurrencyModel();
-            List<SelectListItem> items = new List<SelectListItem>();
-
-            items.Add(new SelectListItem { Text = "USD", Value = "0" });
-            items.Add(new SelectListItem { Text = "EURO", Value = "1" });
-            items.Add(new SelectListItem { Text = "AUD", Value = "2" });
-
-            c.TargetCurrency = items;
-
             return View(c);
         }
 
