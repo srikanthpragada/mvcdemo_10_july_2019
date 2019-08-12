@@ -1,32 +1,24 @@
 ﻿@model mvcdemo.Models.CurrencyModel
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/master.cshtml";
+    ViewBag.Title = "Currency Conversion";
 }
 
-<!DOCTYPE html>
+0
+Targe
+<h2>Currency Conversion</h2>
+@using (Html.BeginForm())
+{
+    <Div>Amount in INR</Div>
+    @Html.EditorFor(model => model.Amount)
+    <p></p>
+    <Div>Target Currency</Div>
+    @Html.DropDownList("Target", Model.TargetCurrency)
+    <p></p>
+    <input type="submit" value="Convert" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Currency Convert</title>
-</head>
-<body>
-    <h2>Currency Conversion</h2>
-    @using (Html.BeginForm())
-    {
-        <Div>Amount in INR</Div>
-        @Html.EditorFor(model => model.Amount)
-        <p></p>
-        <Div>Target Currency</Div>
-        @Html.DropDownList("Target", Model.TargetCurrency)
-        <p></p>
-        <input type="submit" value="Convert"  />
-        
-        <h3>Result : @Model.Result</h3>
-    }
+    <h3>Result : @Model.Result</h3>
+}
 
 
-
-</body>
-</html>

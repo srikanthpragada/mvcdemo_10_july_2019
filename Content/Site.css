@@ -1,6 +1,15 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.banner {
+    font-size:20pt;
+    font-family:Arial;
+    font-weight:bold;
+    background-color:red;
+    color:white;
+    letter-spacing:5pt;
 }
 
 /* Set padding to keep content from hitting the edges */

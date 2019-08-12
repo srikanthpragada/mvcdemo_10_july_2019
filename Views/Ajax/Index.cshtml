@@ -1,54 +1,49 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/master.cshtml";
+    ViewBag.Title = "Ajax Demo";
 }
 
-<!DOCTYPE html>
+<script>
+    function getDateTime() {
+        $.get("/Ajax/Now", null, showDateTime);
+    }
+    // Callback function
+    function showDateTime(response) {
+        $("#datetime").text(response)
+    }
+</script>
+<h2>Ajax With jQuery</h2>
+<button onclick="getDateTime()">Get Date and Time</button>
+<h3 id="datetime"></h3>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Ajax Demo</title>
-    @Scripts.Render("~/bundles/jquery")
+<h2>Ajax with Ajax Helper</h2>
+@Ajax.ActionLink("Get Date and Time", "Now", "Ajax",
+       new AjaxOptions {UpdateTargetId = "now", LoadingElementId="feedback"})
+<span id="feedback" style="display:none">Loading...</span>
+<h3 id="now"></h3>
+
+<h2>Ajax Form with Ajax Helper</h2>
+@using (Ajax.BeginForm("StudentName",
+      new AjaxOptions { UpdateTargetId = "sname" }))
+{
+    <span>Rollno :</span>
+    <input type="text" name="rollno" />
+    <input type="submit" value="Get" />
+    <span id="sname"></span>
+}
+
+<h2>Ajax Form with Partial View</h2>
+@using (Ajax.BeginForm("StudentSearch",
+      new AjaxOptions { UpdateTargetId = "students" }))
+{
+    <input type="text" name="sname" placeholder="Name" />
+    <input type="submit" value="Search" />
+    <div id="students"></div>
+}
+
+@section scripts {
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script>
-        function getDateTime() {
-            $.get("/Ajax/Now", null, showDateTime);
-        }
-        // Callback function 
-        function showDateTime(response) {
-            $("#datetime").text(response)
-        }
-    </script>
-</head>
-<body>
-    <h2>Ajax With jQuery</h2>
-    <button onclick="getDateTime()">Get Date and Time</button>
-    <h3 id="datetime"></h3>
+}
 
-    <h2>Ajax with Ajax Helper</h2>
-    @Ajax.ActionLink("Get Date and Time", "Now", "Ajax",
-           new AjaxOptions {UpdateTargetId = "now"})
-    <h3 id="now"></h3>
 
-    <h2>Ajax Form with Ajax Helper</h2>
-    @using (Ajax.BeginForm("StudentName",
-          new AjaxOptions { UpdateTargetId = "sname" }))
-    {
-        <span>Rollno :</span>
-        <input type="text" name="rollno" />
-        <input type="submit" value="Get" />
-        <span id="sname"></span>
-    }
-
-    <h2>Ajax Form with Partial View</h2>
-    @using (Ajax.BeginForm("StudentSearch",
-          new AjaxOptions { UpdateTargetId = "students" }))
-    {
-        <input type="text" name="sname" placeholder="Name" />
-        <input type="submit" value="Search" />
-        <div id="students"></div>
-    }
-
-</body>
-</html>
