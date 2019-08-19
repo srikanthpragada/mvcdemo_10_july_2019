@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div class="banner">Contacts</div>
+    <div class="menu">
+        [@Html.ActionLink("Home", "Index", "Contacts")]
+        &nbsp;
+        [@Html.ActionLink("Add", "Add", "Contacts")]
+        &nbsp;
+        [@Html.ActionLink("List", "List", "Contacts")]
+        &nbsp;
+        [@Html.ActionLink("Search", "Search", "Contacts")]
+    </div>
+    @RenderBody()
+</body>
+</html>

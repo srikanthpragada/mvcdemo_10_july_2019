@@ -26,5 +26,19 @@ namespace mvcdemo.Models
         [MaxLength(200)]
         public string Profile { get; set; }
         
+        [NotMapped]
+        public string ShortProfile
+        {
+            get
+            {
+                if (Profile.Length > 30)
+                    return Profile.Substring(0, 30) + " [more] ";
+                else
+                    return Profile;
+            }
+        }
+
+
+
     }
 }
