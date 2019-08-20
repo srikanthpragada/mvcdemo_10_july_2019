@@ -15,12 +15,14 @@ namespace mvcdemo.Models
 
         [MaxLength(30)]
         [Required]
+        [RegularExpression("[A-Za-z ]+", ErrorMessage = "Invalid Person Name")]
         public string Name { get; set; }
 
         [MaxLength(30)]
         public string Email { get; set; }
 
         [MaxLength(50)]
+        [RegularExpression("[0-9]*",ErrorMessage ="Invalid Phone Number")]
         public string Phone { get; set; }
 
         [MaxLength(200)]

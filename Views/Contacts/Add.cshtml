@@ -1,17 +1,18 @@
 ﻿@model mvcdemo.Models.Contact
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Add Contact";
     Layout = "~/Views/Shared/ContactsMaster.cshtml";
 }
 
-<h2>Edit Contact</h2>
+<h2>Add Contact</h2>
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     <div>Name </div>
-    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { autocomplete = "off" } })
+    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { autocomplete="off" } })
     <span>&nbsp;</span>
     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
     <p></p>
@@ -30,7 +31,7 @@
     <span>&nbsp;</span>
     @Html.ValidationMessageFor(model => model.Profile, "", new { @class = "text-danger" })
     <p></p>
-    <input type="submit" value="Update" class="btn btn-default" />
+    <input type="submit" value="Add" class="btn btn-default" />
 }
 
 

@@ -5,47 +5,28 @@
     Layout = "~/Views/Shared/ContactsMaster.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Contact</h2>
 
-<div>
-    <h4>Contact</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<table cellpadding="5pt">
+    <tr>
+        <td class="colhead">Name </td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td class="colhead">Email </td>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <td class="colhead">Phone </td>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <td class="colhead">Profile </td>
+        <td>@Model.Profile</td>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+</table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+<p></p>
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) 
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Profile)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Profile)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

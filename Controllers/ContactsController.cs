@@ -19,7 +19,17 @@ namespace mvcdemo.Controllers
                                    .OrderByDescending(c => c.Id)
                                    .Take(5)
                                    .ToList();
-            return View(recentContacts);
+            ViewBag.Title = "Recent Contacts";
+            return View("contacts",recentContacts);
+        }
+
+        public ActionResult List()
+        {
+            var contacts = db.Contacts
+                                   .OrderBy(c => c.Name)
+                                   .ToList();
+            ViewBag.Title = "All Contacts";
+            return View("contacts", contacts);
         }
 
         // GET: Contacts/Details/5
@@ -37,18 +47,17 @@ namespace mvcdemo.Controllers
             return View(contact);
         }
 
-        // GET: Contacts/Create
-        public ActionResult Create()
+        // GET: Contacts/Add
+        public ActionResult Add()
         {
             return View();
         }
 
-        // POST: Contacts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Contacts/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Email,Phone,Profile")] Contact contact)
+        public ActionResult Add([Bind(Include = "Name,Email,Phone,Profile")]
+                                Contact contact)
         {
             if (ModelState.IsValid)
             {
@@ -80,10 +89,12 @@ namespace mvcdemo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Email,Phone,Profile")] Contact contact)
+        public ActionResult Edit([Bind(Include = "Id,Name,Email,Phone,Profile")]
+                                 Contact contact)
         {
             if (ModelState.IsValid)
             {
+                // Change state of object to Modified so that it is sent to DB
                 db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -103,15 +114,6 @@ namespace mvcdemo.Controllers
             {
                 return HttpNotFound();
             }
-            return View(contact);
-        }
-
-        // POST: Contacts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Contact contact = db.Contacts.Find(id);
             db.Contacts.Remove(contact);
             db.SaveChanges();
             return RedirectToAction("Index");
