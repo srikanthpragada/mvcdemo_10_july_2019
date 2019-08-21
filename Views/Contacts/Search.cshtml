@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Search Contacts";
+    Layout = "~/Views/Shared/ContactsMaster.cshtml";
+}
+
+<h2>Search Contact</h2>
+
+@using (Ajax.BeginForm("SearchContacts",
+                      new AjaxOptions { UpdateTargetId = "contacts" }))
+{
+    <input type="text" placeholder="Name" name="pattern" />
+    <input type="submit" value="Search" />
+    <p></p>
+    <div id="contacts">
+
+    </div>
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

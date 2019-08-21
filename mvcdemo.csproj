@@ -210,9 +210,12 @@
     <Content Include="Views\Contacts\Details.cshtml" />
     <Content Include="Views\Contacts\Edit.cshtml" />
     <Content Include="Views\Contacts\contacts.cshtml" />
+    <Content Include="Views\Contacts\Search.cshtml" />
+    <Content Include="Views\Contacts\SearchContacts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="photos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

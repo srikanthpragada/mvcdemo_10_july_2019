@@ -6,7 +6,7 @@
 }
 
 <h2>Contact</h2>
-
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id })
 <table cellpadding="5pt">
     <tr>
         <td class="colhead">Name </td>
@@ -24,9 +24,9 @@
         <td class="colhead">Profile </td>
         <td>@Model.Profile</td>
     </tr>
-
 </table>
-
 <p></p>
-@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) 
+<img src="@Model.PhotoURL" style="width:200px;height:200px" />
+
+
 

@@ -8,11 +8,12 @@
 <h2>Add Contact</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Add","Contacts", FormMethod.Post, 
+                       new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div>Name </div>
-    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { autocomplete="off" } })
+    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { autocomplete = "off" } })
     <span>&nbsp;</span>
     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
     <p></p>
@@ -30,6 +31,9 @@
     @Html.EditorFor(model => model.Profile, new { htmlAttributes = new { @class = "form-control" } })
     <span>&nbsp;</span>
     @Html.ValidationMessageFor(model => model.Profile, "", new { @class = "text-danger" })
+    <p></p>
+    <div>Select Picture</div>
+    <input type="file" name="ContactPhoto" />
     <p></p>
     <input type="submit" value="Add" class="btn btn-default" />
 }

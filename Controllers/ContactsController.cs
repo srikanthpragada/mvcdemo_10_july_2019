@@ -56,13 +56,21 @@ namespace mvcdemo.Controllers
         // POST: Contacts/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add([Bind(Include = "Name,Email,Phone,Profile")]
-                                Contact contact)
+        public ActionResult Add(Contact contact)
         {
             if (ModelState.IsValid)
             {
                 db.Contacts.Add(contact);
                 db.SaveChanges();
+                if (contact.ContactPhoto != null)
+                {
+                    // save uploaded file 
+                    var filename = "~/photos/" + contact.Id + ".jpg"; // Virtual path 
+                    var pfilename = Server.MapPath(filename); // virtual path to physical path 
+                    HttpContext.Trace.Write("V. Filename " + filename);
+                    HttpContext.Trace.Write("P. Filename " + pfilename);
+                    contact.ContactPhoto.SaveAs(pfilename); // Saving uploaded file 
+                }
                 return RedirectToAction("Index");
             }
 
@@ -117,6 +125,21 @@ namespace mvcdemo.Controllers
             db.Contacts.Remove(contact);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        public ActionResult SearchContacts(string pattern)
+        {
+            var selectedContacts = db.Contacts
+                                   .Where (c => c.Name.Contains(pattern))  
+                                   .ToList();
+
+            ViewBag.Title = "";
+            return PartialView("SearchContacts", selectedContacts);
         }
 
         protected override void Dispose(bool disposing)

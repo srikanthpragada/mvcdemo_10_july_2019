@@ -40,7 +40,16 @@ namespace mvcdemo.Models
             }
         }
 
+        [NotMapped]
+        public string  PhotoURL
+        {
+            get
+            {
+                return "/photos/" + Id.ToString() + ".jpg";
+            }
+        }
 
-
+        [NotMapped]
+        public HttpPostedFileBase ContactPhoto { get; set; }
     }
 }

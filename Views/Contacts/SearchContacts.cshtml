@@ -1,0 +1,52 @@
+﻿@model IEnumerable<mvcdemo.Models.Contact>
+
+@if (Model.Count() > 0)
+{
+
+    <table style="width:100%" cellpadding="5pt">
+        <tr class="tabheading">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profile)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name,"Details", new {id=item.Id })
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.Phone
+                </td>
+                <td>
+                    @item.ShortProfile
+                </td>
+                <td style="text-align:center">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id },
+                       new { onclick = "return confirm('Do you want to delete contact?')"}
+                      )
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h3>Sorry! No contacts found!</h3>
+}
