@@ -1,6 +1,7 @@
-﻿
+﻿@model mvcdemo.Models.User 
 @{
-    Layout = null;
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/AnonymousLayout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -12,10 +13,24 @@
 </head>
 <body>
     <h2>Login</h2>
-    <form method="post">
-        Password : <input type="password" name="password" />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>Username </div>
+        @Html.EditorFor(model => model.Username)
+        <span>&nbsp;</span>
+        @Html.ValidationMessageFor(model => model.Username)
+        <p></p>
+        <div>Password </div>
+        @Html.PasswordFor(model => model.Password)
+        <span>&nbsp;</span>
+        @Html.ValidationMessageFor(model => model.Password, "")
+        <p></p>
         <input type="submit" value="Login" />
-    </form>
+    }
     <h3>@ViewBag.Message</h3>
+    <p/>
+    @Html.ActionLink("Register","Register","User")
 </body>
 </html>

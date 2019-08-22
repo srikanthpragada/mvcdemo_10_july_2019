@@ -11,7 +11,9 @@ namespace mvcdemo.Models
         public ContactsContext()
             : base(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=msdb;Integrated Security=True")
         {
+            Database.SetInitializer<ContactsContext>(null);
         }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

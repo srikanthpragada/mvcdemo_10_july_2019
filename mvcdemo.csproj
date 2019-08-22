@@ -164,6 +164,7 @@
     <Compile Include="Models\ContactsContext.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\CurrencyModel.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +213,8 @@
     <Content Include="Views\Contacts\contacts.cshtml" />
     <Content Include="Views\Contacts\Search.cshtml" />
     <Content Include="Views\Contacts\SearchContacts.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Shared\AnonymousLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

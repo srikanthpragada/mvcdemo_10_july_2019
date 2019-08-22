@@ -1,0 +1,30 @@
+﻿@model mvcdemo.Models.User
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/AnonymousLayout.cshtml";
+}
+
+<h2>Registration</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>Username </div>
+    @Html.EditorFor(model => model.Username)
+    <span>&nbsp;</span>
+    @Html.ValidationMessageFor(model => model.Username)
+    <p></p>
+    <div>Password </div>
+    @Html.PasswordFor(model => model.Password)
+    <span>&nbsp;</span>
+    @Html.ValidationMessageFor(model => model.Password, "")
+    <p></p>
+    <div>Email Address </div>
+    @Html.EditorFor(model => model.Email)
+    <span>&nbsp;</span>
+    @Html.ValidationMessageFor(model => model.Email)
+    <p></p>
+    <input type="submit" value="Register" />
+}
+<p></p>
+@Html.ActionLink("Login", "Login", "User")

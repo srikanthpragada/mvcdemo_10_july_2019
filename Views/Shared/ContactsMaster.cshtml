@@ -16,6 +16,10 @@
         [@Html.ActionLink("List", "List", "Contacts")]
         &nbsp;
         [@Html.ActionLink("Search", "Search", "Contacts")]
+        &nbsp;
+        [@Html.ActionLink("Logout", "Logout", "User")]
+
+        <span>User : @Session["username"]</span>
     </div>
     @RenderBody()
 </body>

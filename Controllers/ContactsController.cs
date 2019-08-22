@@ -10,12 +10,15 @@ using mvcdemo.Models;
 
 namespace mvcdemo.Controllers
 {
+    [Authorize]
     public class ContactsController : Controller
     {
         private ContactsContext db = new ContactsContext();
         public ActionResult Index()
         {
+            var username = Session["username"].ToString();
             var recentContacts = db.Contacts
+                                   .Where (c => c.Username == username)
                                    .OrderByDescending(c => c.Id)
                                    .Take(5)
                                    .ToList();
@@ -25,7 +28,9 @@ namespace mvcdemo.Controllers
 
         public ActionResult List()
         {
+            var username = Session["username"].ToString();
             var contacts = db.Contacts
+                                   .Where(c => c.Username == username)
                                    .OrderBy(c => c.Name)
                                    .ToList();
             ViewBag.Title = "All Contacts";
@@ -61,6 +66,7 @@ namespace mvcdemo.Controllers
             if (ModelState.IsValid)
             {
                 db.Contacts.Add(contact);
+                contact.Username = Session["username"].ToString();
                 db.SaveChanges();
                 if (contact.ContactPhoto != null)
                 {
@@ -97,14 +103,22 @@ namespace mvcdemo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Email,Phone,Profile")]
-                                 Contact contact)
+        public ActionResult Edit(Contact contact)
         {
             if (ModelState.IsValid)
             {
                 // Change state of object to Modified so that it is sent to DB
                 db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
+                if (contact.ContactPhoto != null)
+                {
+                    // save uploaded file 
+                    var filename = "~/photos/" + contact.Id + ".jpg"; // Virtual path 
+                    var pfilename = Server.MapPath(filename); // virtual path to physical path 
+                    HttpContext.Trace.Write("V. Filename " + filename);
+                    HttpContext.Trace.Write("P. Filename " + pfilename);
+                    contact.ContactPhoto.SaveAs(pfilename); // Saving uploaded file 
+                }
                 return RedirectToAction("Index");
             }
             return View(contact);
@@ -134,10 +148,10 @@ namespace mvcdemo.Controllers
 
         public ActionResult SearchContacts(string pattern)
         {
+            var username = Session["username"].ToString();
             var selectedContacts = db.Contacts
-                                   .Where (c => c.Name.Contains(pattern))  
+                                   .Where(c => c.Username == username  && c.Name.Contains(pattern))  
                                    .ToList();
-
             ViewBag.Title = "";
             return PartialView("SearchContacts", selectedContacts);
         }

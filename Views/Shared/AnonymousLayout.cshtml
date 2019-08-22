@@ -1,0 +1,13 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="banner">Contacts</div>
+    @RenderBody()
+</body>
+</html>

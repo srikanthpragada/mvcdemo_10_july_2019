@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace mvcdemo.Models
 {
@@ -22,12 +23,12 @@ namespace mvcdemo.Models
         public string Email { get; set; }
 
         [MaxLength(50)]
-        [RegularExpression("[0-9]*",ErrorMessage ="Invalid Phone Number")]
+        [RegularExpression("[0-9]*", ErrorMessage = "Invalid Phone Number")]
         public string Phone { get; set; }
 
         [MaxLength(200)]
         public string Profile { get; set; }
-        
+
         [NotMapped]
         public string ShortProfile
         {
@@ -41,7 +42,7 @@ namespace mvcdemo.Models
         }
 
         [NotMapped]
-        public string  PhotoURL
+        public string PhotoURL
         {
             get
             {
@@ -51,5 +52,10 @@ namespace mvcdemo.Models
 
         [NotMapped]
         public HttpPostedFileBase ContactPhoto { get; set; }
+
+        public string Username { get; set; }
+
+        //[ForeignKey("Username")]
+        //public User User { get; set; }
     }
 }
