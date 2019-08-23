@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Contacts Client</title>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        var URL = "/api/WebContacts/"
+        function getContacts() {
+            $.getJSON(URL, null, showContacts);
+        }
+        function showContacts(contacts) {
+            console.log(contacts);
+            st = ""
+            for (var i = 0; i < contacts.length; i++) {
+                var c = contacts[i]; 
+                st += "<li>" + c.Id + "," + c.Name + "," + c.Email + "</li>";
+            }
+            $("#contacts").html(st);
+
+        }
+
+        function deleteContact() {
+            $.ajax(
+                {
+                    url: URL + $("#contactId").val(),
+                    type: 'delete',
+                    success: function () {
+                         alert("Successfully Deleted!")
+                    },
+                    error: function (xhr) {
+                        console.log(xhr)
+                        if ( xhr.status == 404)
+                            alert("Contact ID is not found!")
+                        else
+                            alert("Could not delete contact due to some server error!")
+                    }
+                }
+            );
+        }
+    </script>
+</head>
+<body>
+    <h1>Contacts Client</h1>
+    <h3>Get Contacts</h3>
+    <button onclick="getContacts()">Get Contacts</button>
+    <ul id="contacts"></ul>
+    <hr />
+
+    <h3>Delete Contact</h3>
+    <input type="number" placeholder="Contact Id"  id="contactId"/>
+    <button onclick="deleteContact()">Delete Contact</button>
+
+</body>
+</html>
