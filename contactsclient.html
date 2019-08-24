@@ -38,6 +38,34 @@
                 }
             );
         }
+
+
+        function addContact() {
+            contact = {
+                'Name': $("#txtName").val(),
+                'Email': $("#txtEmail").val(),
+                'Phone': $("#txtPhone").val(),
+                'Profile': $("#txtProfile").val(),
+                'Username': $("#txtUser").val()
+            };
+
+            console.log(contact);
+
+            $.ajax(
+                {
+                    url: URL,
+                    type: 'post',
+                    data : contact,
+                    success: function () {
+                        alert("Successfully Added Contact!")
+                    },
+                    error: function (xhr) {
+                        console.log(xhr)
+                        alert("Could not add contact due to some server error!")
+                    }
+                }
+            );
+        }
     </script>
 </head>
 <body>
@@ -48,8 +76,16 @@
     <hr />
 
     <h3>Delete Contact</h3>
-    <input type="number" placeholder="Contact Id"  id="contactId"/>
+    <input type="number" placeholder="Contact Id" id="contactId" />
     <button onclick="deleteContact()">Delete Contact</button>
+    <hr />
+    <h3>Add Contact</h3>
+    <input type="text" placeholder="Name" id="txtName" />
+    <input type="email" placeholder="Email" id="txtEmail" />
+    <input type="text" placeholder="Phone" id="txtPhone" />
+    <input type="text" placeholder="Profile" id="txtProfile" />
+    <input type="text" placeholder="Username" id="txtUser" />
+    <button onclick="addContact()">Add Contact</button>
 
 </body>
 </html>

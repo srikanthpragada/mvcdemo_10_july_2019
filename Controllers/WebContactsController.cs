@@ -76,7 +76,7 @@ namespace mvcdemo.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState); // 400
             }
 
             db.Contacts.Add(contact);
@@ -92,7 +92,7 @@ namespace mvcdemo.Controllers
             Contact contact = db.Contacts.Find(id);
             if (contact == null)
             {
-                return NotFound();
+                return NotFound(); // 404
             }
             try
             {
@@ -101,7 +101,7 @@ namespace mvcdemo.Controllers
             }
             catch(Exception ex)
             {
-                return InternalServerError(ex);
+                return InternalServerError(ex); // 500
             }
 
             return Ok(contact);

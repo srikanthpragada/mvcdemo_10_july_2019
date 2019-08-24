@@ -34,10 +34,15 @@ namespace mvcdemo.Models
         {
             get
             {
-                if (Profile.Length > 30)
-                    return Profile.Substring(0, 30) + " [more] ";
+                if (Profile != null)
+                {
+                    if (Profile.Length > 30)
+                        return Profile.Substring(0, 30) + " [more] ";
+                    else
+                        return Profile;
+                }
                 else
-                    return Profile;
+                    return null;
             }
         }
 
